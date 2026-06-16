@@ -1,0 +1,44 @@
+.c-admin-call-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.c-admin-call-board__title {
+  text-align: center;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+}
+
+.c-admin-call-board__empty {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  text-align: center;
+
+  p {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: #444;
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    border: 2px solid #000;
+    background: #ffe066;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+
+    &:hover {
+      background: #ffd633;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<div class="c-admin-call-board" *ngIf="!noPack">
+  <p class="c-admin-call-board__title">{{ gameName }}</p>
+  <app-bingo-board
+    layout="horizontal"
+    [itemGroups]="itemGroups"
+    [calledIds]="calledIds"
+    [lastCalledId]="lastCalledId"
+    (itemToggle)="onItemClick($event)"
+    (clearBoard)="clearBoard()"
+  ></app-bingo-board>
+</div>
+
+<div class="c-admin-call-board__empty" *ngIf="noPack">
+  <p>No game loaded. Set up a game or open a shared call board link.</p>
+  <button type="button" (click)="goToSetup()">Go to setup</button>
+</div>

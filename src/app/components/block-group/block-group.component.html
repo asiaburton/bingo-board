@@ -1,9 +1,13 @@
-<ol *ngIf="category" class="c-bb-block-group">
-  <li class="c-bb-block-group__category">
-    {{ category }}
-  </li>
-
-  <li *ngFor="let block of blocks" class="c-bb-block-group__block-container">
-    <app-block [blockId]="block.id" [isCalled]="block.isCalled"></app-block>
-  </li>
-</ol>
+<div class="c-bb-block-group" [class.c-bb-block-group--horizontal]="horizontal">
+  <div class="c-bb-block-group__category">{{ category }}</div>
+  <ol class="c-bb-block-group__blocks">
+    <li *ngFor="let item of items" class="c-bb-block-group__block-container">
+      <app-block
+        [item]="item"
+        [isCalled]="isCalled(item.id)"
+        [isLastCalled]="isLastCalled(item.id)"
+        (itemClick)="onItemClick($event)"
+      ></app-block>
+    </li>
+  </ol>
+</div>

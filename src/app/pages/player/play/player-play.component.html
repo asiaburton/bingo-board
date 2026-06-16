@@ -1,0 +1,17 @@
+<div class="c-player-play" *ngIf="pack">
+  <header class="c-player-play__header">
+    <h1 class="c-player-play__title">{{ pack.name }}</h1>
+  </header>
+  <div class="c-player-play__card-wrap">
+    <app-bingo-card [card]="card" (cardChange)="onCardChange($event)"></app-bingo-card>
+  </div>
+  <button type="button" class="c-player-play__new-card" (click)="newCard()">
+    New Board
+  </button>
+</div>
+
+<div class="c-player-play__empty" *ngIf="!pack">
+  <h1>Bingo</h1>
+  <p>Open the player link from your host to load a game.</p>
+  <button type="button" (click)="goToAdmin()">Admin setup</button>
+</div>

@@ -1,9 +1,11 @@
 <button
-  *ngIf="blockId"
-  class="c-bb-block"
-  [ngClass]="{ 'c-bb-block--called': isCalled, 'c-bb-block--last-called': isLastCalled$ | async }"
   type="button"
+  class="c-bb-block"
+  [class.c-bb-block--called]="isCalled"
+  [class.c-bb-block--last-called]="isLastCalled"
+  [attr.title]="item?.definition || null"
   (click)="onBlockClick()"
 >
-  {{ blockId }}
+  {{ item?.label }}
+  <span class="c-bb-block__tooltip" *ngIf="item?.definition" aria-hidden="true">{{ item?.definition }}</span>
 </button>

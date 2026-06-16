@@ -1,29 +1,20 @@
-import { Component, Input } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { filter, map } from 'rxjs';
-import { toggleBlock } from '../../store/bingo-board.actions';
-import { selectLastCalledBlock } from '../../store/bingo-board.selectors';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CallableItemDefinition } from '../../models/game-pack.models';
 
 @Component({
   selector: 'app-block',
   templateUrl: './block.component.html',
-  styleUrls: ['./block.component.scss']
+  styleUrls: ['./block.component.scss'],
 })
 export class BlockComponent {
-  @Input() blockId?: number;
-  @Input() isCalled: boolean = false;
+  @Input() item?: CallableItemDefinition;
+  @Input() isCalled = false;
+  @Input() isLastCalled = false;
+  @Output() itemClick = new EventEmitter<CallableItemDefinition>();
 
-  isLastCalled$ = this.store.pipe(
-    select(selectLastCalledBlock),
-    filter(blockId => blockId !== null),
-    map(blockId => this.isCalled && blockId === this.blockId)
-  );
-
-  constructor(private readonly store: Store) {}
-
-  onBlockClick() {
-    if (this.blockId) {
-      this.store.dispatch(toggleBlock({ blockId: this.blockId }))
+  onBlockClick(): void {
+    if (this.item) {
+      this.itemClick.emit(this.item);
     }
   }
 }

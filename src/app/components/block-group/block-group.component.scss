@@ -3,21 +3,66 @@
 .c-bb-block-group {
   margin: 0;
   padding: 0;
-  list-style: none;
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
 
   &__category {
     border: 1px solid black;
+    border-bottom: none;
     background-color: lightblue;
-    width: $box-size;
-    height: $box-size;
-    max-width: $max-box-size;
-    max-height: $max-box-size;
+    width: $cell-width;
+    min-width: $cell-min-width;
+    max-width: $cell-max-width;
+    height: $cell-width;
+    min-height: $cell-min-width;
+    max-height: $cell-max-width;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: $font-size;
+    font-size: $header-font-size;
     font-family: sans-serif;
+    font-weight: bold;
+    color: black;
+    box-sizing: border-box;
   }
 
+  &__blocks {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__block-container {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+    align-items: stretch;
+
+    .c-bb-block-group__category {
+      border-bottom: 1px solid black;
+      border-right: none;
+      flex-shrink: 0;
+      width: $call-board-cell-size;
+      min-width: $call-board-cell-min;
+      max-width: $call-board-cell-max;
+      height: $call-board-cell-size;
+      min-height: $call-board-cell-min;
+      max-height: $call-board-cell-max;
+      font-size: $call-board-header-font;
+    }
+
+    .c-bb-block-group__blocks {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      flex: 1;
+      min-width: 0;
+    }
+  }
 }

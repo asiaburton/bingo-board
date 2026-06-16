@@ -1,7 +1,20 @@
-<div class="c-bb-bingo-board">
+<div
+  class="c-bb-bingo-board"
+  [class.c-bb-bingo-board--horizontal]="layout === 'horizontal'"
+>
   <ol class="c-bb-bingo-board__board">
-    <li *ngFor="let blockGroup of blockGroups$ | async" class="c-bb-bingo-board__group-container">
-      <app-block-group [category]="blockGroup.category" [blocks]="blockGroup.blocks"></app-block-group>
+    <li
+      *ngFor="let group of itemGroups"
+      class="c-bb-bingo-board__group-container"
+    >
+      <app-block-group
+        [category]="group.category"
+        [items]="group.items"
+        [calledIds]="calledIds"
+        [lastCalledId]="lastCalledId"
+        [horizontal]="layout === 'horizontal'"
+        (itemToggle)="onItemClick($event)"
+      ></app-block-group>
     </li>
   </ol>
 

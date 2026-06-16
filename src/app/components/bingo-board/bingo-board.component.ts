@@ -1,26 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { selectGroupedBlocks } from '../../store/bingo-board.selectors';
-import { clearBoard, initializeGame } from '../../store/bingo-board.actions';
-import { initialState } from '../../store/bingo-board.reducer';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  CallableItemDefinition,
+  CallableItemGroup,
+} from '../../models/game-pack.models';
 
 @Component({
   selector: 'app-bingo-board',
   templateUrl: './bingo-board.component.html',
-  styleUrls: ['./bingo-board.component.scss']
+  styleUrls: ['./bingo-board.component.scss'],
 })
-export class BingoBoardComponent implements OnInit {
-  blockGroups$ = this.store.pipe(select(selectGroupedBlocks));
+export class BingoBoardComponent {
+  @Input() itemGroups: CallableItemGroup[] = [];
+  @Input() calledIds = new Set<string>();
+  @Input() lastCalledId: string | null = null;
+  /** Vertical columns (player-style) or horizontal rows per letter (caller board). */
+  @Input() layout: 'vertical' | 'horizontal' = 'vertical';
+  @Output() itemToggle = new EventEmitter<CallableItemDefinition>();
+  @Output() clearBoard = new EventEmitter<void>();
 
-  constructor(private readonly store: Store) {}
-
-  ngOnInit() {
-    this.store.dispatch(initializeGame())
+  onItemClick(item: CallableItemDefinition): void {
+    this.itemToggle.emit(item);
   }
 
-  onClearBoardClick() {
-    if (confirm('Are you sure?')) {
-      this.store.dispatch(clearBoard());
-    }
+  onClearBoardClick(): void {
+    this.clearBoard.emit();
   }
 }

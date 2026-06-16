@@ -1,0 +1,127 @@
+<div class="c-admin-setup">
+  <h2>Game Setup</h2>
+
+  <label>
+    Board Name
+    <input type="text" [(ngModel)]="name" />
+  </label>
+
+  <fieldset class="c-admin-setup__mode">
+    <legend>Bingo type</legend>
+    <label *ngFor="let option of modes">
+      <input type="radio" name="mode" [(ngModel)]="mode" [value]="option.value" />
+      {{ option.label }}
+    </label>
+  </fieldset>
+
+  <section class="c-admin-setup__background">
+    <h3>Player screen background</h3>
+
+    <label>
+      Background Image
+      <select
+        [ngModel]="backgroundSource === 'preset' ? backgroundPreset : ''"
+        (ngModelChange)="selectPreset($event)"
+      >
+        <option *ngFor="let preset of presets" [value]="preset.value">{{ preset.label }}</option>
+      </select>
+    </label>
+
+    <div
+      class="c-admin-setup__paste-zone"
+      tabindex="0"
+      (paste)="onPasteZonePaste($event)"
+      (drop)="onPasteZoneDrop($event)"
+      (dragover)="onPasteZoneDragOver($event)"
+    >
+      <p><strong>Paste an image here</strong> (Ctrl+V / Cmd+V), drag and drop, or choose a file.</p>
+      <label class="c-admin-setup__upload">
+        Choose image file
+        <input type="file" accept="image/*" (change)="onImageFileSelected($event)" />
+      </label>
+    </div>
+
+    <p class="c-admin-setup__paste-hint" *ngIf="pasteHint">{{ pasteHint }}</p>
+
+    <div class="c-admin-setup__library" *ngIf="savedBackgrounds.length">
+      <h4>Saved backgrounds</h4>
+      <ul class="c-admin-setup__library-list">
+        <li
+          *ngFor="let bg of savedBackgrounds"
+          class="c-admin-setup__library-item"
+          [class.c-admin-setup__library-item--selected]="backgroundSource === 'library' && selectedLibraryId === bg.id"
+          (click)="selectLibraryItem(bg.id)"
+        >
+          <img [src]="bg.dataUrl" [alt]="bg.name" />
+          <span>{{ bg.name }}</span>
+          <button type="button" (click)="removeLibraryItem(bg.id, $event)">Remove</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="c-admin-setup__preview" *ngIf="playerBackgroundPreview">
+      <span>Player preview</span>
+      <img [src]="playerBackgroundPreview" alt="Player background preview" />
+    </div>
+  </section>
+
+  <section class="c-admin-setup__squares" *ngIf="mode === 'custom'">
+    <div class="c-admin-setup__squares-header">
+      <h3>Custom squares (min 24 unique)</h3>
+      <div class="c-admin-setup__squares-toggle">
+        <button
+          type="button"
+          [class.c-admin-setup__squares-toggle--active]="squareInputMode === 'rows'"
+          (click)="switchToRows()"
+        >Row editor</button>
+        <button
+          type="button"
+          [class.c-admin-setup__squares-toggle--active]="squareInputMode === 'bulk'"
+          (click)="switchToBulk()"
+        >Bulk paste</button>
+      </div>
+    </div>
+
+    <div *ngIf="squareInputMode === 'bulk'" class="c-admin-setup__bulk">
+      <p class="c-admin-setup__squares-hint">
+        Paste a list of squares, one per line. Use a <strong>pipe ( | )</strong> to separate the phrase from its definition.<br />
+        Example:<br />
+        <code>celebration | a party or gathering for enjoyment</code><br />
+        <code>family | a group of related persons</code><br />
+        <code>unity</code> (no definition)
+      </p>
+      <textarea [(ngModel)]="bulkText" rows="14" placeholder="celebration | a party or gathering for enjoyment&#10;family | a group of related persons&#10;unity"></textarea>
+      <button type="button" class="c-admin-setup__bulk-apply" (click)="parseBulk()">Apply to rows</button>
+    </div>
+
+    <div *ngIf="squareInputMode === 'rows'">
+      <p class="c-admin-setup__squares-hint">
+        Enter a word or phrase for each square. Optionally add a definition — it will appear when players hover over the square.
+        Switch to <strong>Bulk paste</strong> to paste many entries at once using the format <code>phrase | definition</code>.
+      </p>
+      <div class="c-admin-setup__square-row" *ngFor="let sq of squares; let i = index">
+        <label class="c-admin-setup__square-text">
+          Phrase
+          <input type="text" [(ngModel)]="sq.text" placeholder="e.g. Juneteenth" />
+        </label>
+        <label class="c-admin-setup__square-def">
+          Definition (optional)
+          <input type="text" [(ngModel)]="sq.definition" placeholder="e.g. June 19, celebrates the end of slavery" />
+        </label>
+        <button type="button" class="c-admin-setup__square-remove" (click)="removeSquare(i)">Remove</button>
+      </div>
+      <button type="button" (click)="addSquare()">+ Add square</button>
+    </div>
+  </section>
+
+  <div class="c-admin-setup__actions">
+    <button type="button" (click)="save()">Save</button>
+    <button type="button" (click)="goToCallBoard()">Open call board</button>
+    <button type="button" (click)="copyPlayerLink()">Copy player link</button>
+    <button type="button" (click)="copyCallLink()">Copy call board link</button>
+    <button type="button" (click)="downloadJson()">Download</button>
+  </div>
+
+  <p class="c-admin-setup__success" *ngIf="copiedMessage">{{ copiedMessage }}</p>
+  <p class="c-admin-setup__error" *ngIf="error">{{ error }}</p>
+</div>

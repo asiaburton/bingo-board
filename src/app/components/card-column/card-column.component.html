@@ -1,0 +1,13 @@
+<div class="c-bc-column">
+  <div class="c-bc-column__heading">
+    <span class="c-bc-column__heading-text">{{ category }}</span>
+  </div>
+  <div class="c-bc-column__squares">
+    <app-card-block
+      *ngFor="let square of squares; let i = index"
+      [square]="square"
+      [index]="startIndex + i"
+      (markChange)="onMarkChange($event)"
+    ></app-card-block>
+  </div>
+</div>

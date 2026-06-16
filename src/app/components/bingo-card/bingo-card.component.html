@@ -1,0 +1,9 @@
+<div class="c-bc-board">
+  <app-card-column
+    *ngFor="let category of categories; let colIndex = index"
+    [category]="category"
+    [squares]="columnGroups[colIndex]"
+    [startIndex]="getColumnStartIndex(colIndex)"
+    (markChange)="onMarkChange($event)"
+  ></app-card-column>
+</div>

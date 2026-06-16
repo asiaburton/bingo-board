@@ -1,0 +1,21 @@
+<div
+  class="c-bc-square"
+  [attr.title]="square.definition || null"
+>
+  <input
+    [id]="checkboxId"
+    class="c-bc-square__checkbox"
+    type="checkbox"
+    [checked]="square.marked"
+    [attr.aria-label]="checkboxId"
+    (change)="onCheckboxChange($event)"
+  />
+  <span class="c-bc-square__marker" *ngIf="square.marked" aria-hidden="true"></span>
+  <label [for]="checkboxId" class="c-bc-square__label">
+    <span
+      class="c-bc-square__text"
+      [class.c-bc-square__text--free]="square.isFree"
+    >{{ displayText }}</span>
+  </label>
+  <span class="c-bc-square__tooltip" *ngIf="square.definition" aria-hidden="true">{{ square.definition }}</span>
+</div>

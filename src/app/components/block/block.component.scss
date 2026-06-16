@@ -1,15 +1,27 @@
 @import '../../styles/variables';
 
 .c-bb-block {
-  display: block;
-  width: $box-size;
-  height: $box-size;
-  max-height: $max-box-size;
-  max-width: $max-box-size;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $cell-width;
+  min-width: $cell-min-width;
+  max-width: $cell-max-width;
+  height: $cell-width;
+  min-height: $cell-min-width;
+  max-height: $cell-max-width;
   background-color: white;
   border: 1px solid black;
   font-family: sans-serif;
-  font-size: $font-size;
+  font-size: $cell-font-size;
+  padding: 0.2rem;
+  word-break: break-word;
+  line-height: 1.15;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  overflow: visible;
 
   &--called {
     background-color: yellow;
@@ -17,6 +29,10 @@
 
   &--last-called {
     animation: blink 750ms infinite;
+  }
+
+  &:hover .c-bb-block__tooltip {
+    display: flex;
   }
 }
 
@@ -31,5 +47,44 @@
 
   100% {
     background-color: white;
+  }
+}
+
+.c-bb-block__tooltip {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+  line-height: 1.25;
+  padding: 0.25rem;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+  word-break: break-word;
+  align-items: center;
+  justify-content: center;
+}
+
+:host-context(.c-bb-bingo-board--horizontal) .c-bb-block {
+  width: $call-board-cell-size;
+  min-width: $call-board-cell-min;
+  max-width: $call-board-cell-max;
+  height: $call-board-cell-size;
+  min-height: $call-board-cell-min;
+  max-height: $call-board-cell-max;
+  font-size: $call-board-cell-font;
+  padding: 0.35rem;
+}
+
+:host-context(.c-bb-bingo-board--horizontal) .c-bb-block__tooltip {
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+}
+
+@media screen and (min-width: 600px) {
+  .c-bb-block {
+    font-size: $cell-font-size-desktop;
   }
 }

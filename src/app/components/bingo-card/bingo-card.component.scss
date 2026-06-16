@@ -1,0 +1,12 @@
+.c-bc-board {
+  margin: 0 auto;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: fit-content;
+  max-width: calc(100vw - 2rem);
+  background: rgba(255, 255, 255, 0.95);
+  overflow-x: auto;
+}
