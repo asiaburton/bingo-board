@@ -2,11 +2,14 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  font-family: sans-serif;
 }
 
 html {
-  background-image: url('assets/pride-bg.jpeg');
+  background-color: #f5f5f5;
 }

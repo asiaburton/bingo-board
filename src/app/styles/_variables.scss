@@ -1,3 +1,18 @@
-$box-size: 6vw;
-$max-box-size: 100px;
-$font-size: 3vw;
+$cell-min-width: 72px;
+$cell-max-width: 110px;
+$cell-width: 18vw;
+$header-font-size: clamp(1.25rem, 4vw, 2rem);
+$cell-font-size: clamp(0.55rem, 2vw, 0.8rem);
+$cell-font-size-desktop: 0.75rem;
+
+// Call board (horizontal rows) — larger for on-screen readability
+$call-board-cell-min: 72px;
+$call-board-cell-max: 120px;
+$call-board-cell-size: clamp(72px, 8vw, 120px);
+$call-board-header-font: clamp(1.25rem, 3.5vw, 1.75rem);
+$call-board-cell-font: clamp(0.75rem, 2.2vw, 1rem);
+
+// Legacy aliases used by player card
+$box-size: $cell-width;
+$max-box-size: $cell-max-width;
+$font-size: $header-font-size;
