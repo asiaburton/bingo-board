@@ -1,27 +1,45 @@
 # BingoBoard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+Local-first Angular bingo app. No server or database required — game config and cards are stored in **localStorage**, and shared via **links**.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Node.js 18 LTS** recommended (Angular 16)
 
-## Code scaffolding
+## Run
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install
+npm start
+```
 
-## Build
+Open `http://localhost:4200`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Routes
 
-## Running unit tests
+| Path | Description |
+|------|-------------|
+| `/admin/setup` | Configure game, backgrounds, copy share links |
+| `/admin/call` | Caller board |
+| `/play` | Player card — mark squares manually |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Admin setup
 
-## Running end-to-end tests
+1. Go to **Admin → Setup** (admin panel always uses `admin-bg.jpg`).
+2. Choose **Standard 1–75 bingo** or **Custom square phrases**.
+3. Set the **player screen background**:
+   - Pick a preset (e.g. Juneteenth), or
+   - **Paste** an image (Ctrl+V / Cmd+V), **drag and drop**, or **choose a file** — saved backgrounds appear in **Saved backgrounds** for reuse.
+4. Click **Save locally**, then **Copy player link** to share with phones.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Uploaded/pasted images are stored in your browser (up to 20) so you can reuse them without uploading again.
 
-## Further help
+## Player flow
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Open the player link on a phone or laptop.
+2. Get a random bingo card.
+3. Mark squares manually as items are called.
+
+## Backup
+
+Use **Download JSON** / **Import JSON** on the admin setup page to move configs between devices.
