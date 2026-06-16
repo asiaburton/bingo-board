@@ -210,6 +210,7 @@ export class AdminSetupComponent implements OnInit, OnDestroy {
     try {
       const pack = this.buildPack();
       this.gamePackService.save(pack);
+      this.updateLinks(pack);
       this.router.navigate(['/admin/call']);
     } catch (e: unknown) {
       this.error = e instanceof Error ? e.message : 'Failed to save';

@@ -122,6 +122,18 @@
     <button type="button" (click)="downloadJson()">Download</button>
   </div>
 
+  <section class="c-admin-setup__links" *ngIf="playerLink">
+    <h3>Share links</h3>
+    <label>
+      Player link
+      <input type="text" [value]="playerLink" readonly />
+    </label>
+    <label>
+      Call board link
+      <input type="text" [value]="callLink" readonly />
+    </label>
+  </section>
+
   <p class="c-admin-setup__success" *ngIf="copiedMessage">{{ copiedMessage }}</p>
   <p class="c-admin-setup__error" *ngIf="error">{{ error }}</p>
 </div>

@@ -20,7 +20,15 @@ export function decodeGamePack(encoded: string): GamePack | null {
   }
 }
 
+function getAppBasePath(): string {
+  const base = document.querySelector('base')?.getAttribute('href') ?? '/';
+  const trimmed = base.replace(/\/$/, '');
+  return trimmed === '/' ? '' : trimmed;
+}
+
 export function buildShareUrl(path: string, pack: GamePack): string {
   const encoded = encodeGamePack(pack);
-  return `${window.location.origin}${path}?pack=${encoded}`;
+  const base = getAppBasePath();
+  const route = path.startsWith('/') ? path : `/${path}`;
+  return `${window.location.origin}${base}${route}?pack=${encoded}`;
 }
