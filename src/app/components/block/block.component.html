@@ -7,5 +7,7 @@
   (click)="onBlockClick()"
 >
   <span class="c-bb-block__label">{{ item?.label }}</span>
-  <span class="c-bb-block__tooltip" *ngIf="item?.definition" aria-hidden="true">{{ item?.definition }}</span>
+  <span class="c-bb-block__tooltip" *ngIf="item?.definition" aria-hidden="true">
+    <span class="c-bb-block__tooltip-text">{{ item?.definition }}</span>
+  </span>
 </button>

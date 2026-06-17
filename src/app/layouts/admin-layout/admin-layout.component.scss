@@ -7,11 +7,6 @@
 }
 
 :host.c-admin-layout--call-board {
-  display: flex;
-  flex-direction: column;
-  min-height: 100dvh;
-  max-height: 100dvh;
-  overflow: hidden;
   background: transparent;
 }
 
@@ -82,9 +77,6 @@
   box-sizing: border-box;
 
   :host.c-admin-layout--call-board & {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
     justify-content: flex-start;
     padding: 0.5rem 0.35rem 0.75rem;
     width: 100%;

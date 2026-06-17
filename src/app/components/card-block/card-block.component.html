@@ -17,5 +17,7 @@
       [class.c-bc-square__text--free]="square.isFree"
     >{{ displayText }}</span>
   </label>
-  <span class="c-bc-square__tooltip" *ngIf="square.definition" aria-hidden="true">{{ square.definition }}</span>
+  <span class="c-bc-square__tooltip" *ngIf="square.definition" aria-hidden="true">
+    <span class="c-bc-square__tooltip-text">{{ square.definition }}</span>
+  </span>
 </div>

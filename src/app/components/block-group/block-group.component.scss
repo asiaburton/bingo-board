@@ -2,9 +2,13 @@
 
 :host {
   display: flex;
-  flex: 1 1 auto;
-  min-height: 0;
   min-width: 0;
+  min-height: 0;
+}
+
+:host-context(.c-bb-bingo-board--horizontal) {
+  width: 100%;
+  height: 100%;
 }
 
 .c-bb-block-group {
@@ -54,33 +58,37 @@
   &--horizontal {
     flex-direction: row;
     align-items: stretch;
-    height: 100%;
-    width: 100%;
+    height: var(--call-cell-size);
+    max-height: var(--call-cell-size);
+    overflow: hidden;
 
     .c-bb-block-group__category {
       border-bottom: 1px solid black;
       border-right: none;
-      width: var(--call-category-size, $call-board-cell-size);
-      min-width: var(--call-category-size, $call-board-cell-min);
-      max-width: var(--call-category-size, $call-board-cell-max);
-      height: 100%;
-      min-height: 0;
-      max-height: none;
+      flex: 0 0 var(--call-category-size);
+      width: var(--call-category-size);
+      min-width: var(--call-category-size);
+      max-width: var(--call-category-size);
+      height: var(--call-cell-size);
+      min-height: var(--call-cell-size);
+      max-height: var(--call-cell-size);
       font-size: $call-board-header-font;
     }
 
     .c-bb-block-group__blocks {
       flex-direction: row;
       flex-wrap: nowrap;
-      flex: 1;
+      flex: 0 1 auto;
       min-width: 0;
-      height: 100%;
+      height: var(--call-cell-size);
     }
 
     .c-bb-block-group__block-container {
-      flex: 1 1 0;
-      min-width: 0;
-      height: 100%;
+      flex: 0 0 var(--call-cell-size);
+      width: var(--call-cell-size);
+      min-width: var(--call-cell-size);
+      max-width: var(--call-cell-size);
+      height: var(--call-cell-size);
     }
   }
 }
