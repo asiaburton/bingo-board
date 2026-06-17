@@ -115,24 +115,13 @@
   </section>
 
   <div class="c-admin-setup__actions">
+    <h3>Share links</h3>
     <button type="button" (click)="save()">Save</button>
     <button type="button" (click)="goToCallBoard()">Open call board</button>
     <button type="button" (click)="copyPlayerLink()">Copy player link</button>
     <button type="button" (click)="copyCallLink()">Copy call board link</button>
     <button type="button" (click)="downloadJson()">Download</button>
   </div>
-
-  <section class="c-admin-setup__links" *ngIf="playerLink">
-    <h3>Share links</h3>
-    <label>
-      Player link
-      <input type="text" [value]="playerLink" readonly />
-    </label>
-    <label>
-      Call board link
-      <input type="text" [value]="callLink" readonly />
-    </label>
-  </section>
 
   <p class="c-admin-setup__success" *ngIf="copiedMessage">{{ copiedMessage }}</p>
   <p class="c-admin-setup__error" *ngIf="error">{{ error }}</p>

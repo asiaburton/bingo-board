@@ -1,12 +1,26 @@
 @import '../../styles/variables';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+:host-context(.c-admin-call-board__board) {
+  flex: 1 1 auto;
+  max-height: 100%;
+  overflow: hidden;
+}
+
 .c-bb-bingo-board {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   max-width: 100%;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
 
   &__board {
     display: flex;
@@ -22,13 +36,47 @@
     overflow-x: auto;
   }
 
+  &--horizontal {
+    --call-board-chrome: 10.5rem;
+    --call-category-size: clamp(1.5rem, 4vw, 2.75rem);
+    --call-cell-width: min(
+      7.5rem,
+      max(1.5rem, calc((100vw - 1rem - var(--call-category-size)) / 15))
+    );
+    --call-cell-height: min(
+      6rem,
+      max(1.5rem, calc((100dvh - var(--call-board-chrome)) / 5))
+    );
+    --call-cell-size: min(var(--call-cell-width), var(--call-cell-height));
+    --call-cell-font: clamp(0.4rem, calc(var(--call-cell-size) * 0.22), 0.9rem);
+
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 0.35rem;
+  }
+
   &--horizontal &__board {
+    flex: 1 1 auto;
+    min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    width: fit-content;
-    max-width: calc(100vw - 2rem);
-    overflow-x: auto;
-    overflow-y: visible;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  &--horizontal &__group-container {
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+    max-height: var(--call-cell-size);
+  }
+
+  &--horizontal &__action-container {
+    margin-top: 0.5rem;
   }
 
   &__group-container {
@@ -41,18 +89,19 @@
   &__action-container {
     display: flex;
     justify-content: center;
-    margin-top: 1.25rem;
+    margin-top: 0.75rem;
     width: 100%;
     max-width: 600px;
+    flex-shrink: 0;
   }
 
   &__clear-button {
     border: 2px solid #000;
     background: #ffe066;
     color: #000;
-    padding: 0.55rem 1.25rem;
+    padding: 0.45rem 1rem;
     border-radius: 4px;
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -60,5 +109,17 @@
     &:hover {
       background: #ffd633;
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .c-bb-bingo-board--horizontal {
+    --call-board-chrome: 9.5rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .c-bb-bingo-board--horizontal {
+    --call-board-chrome: 8.5rem;
   }
 }

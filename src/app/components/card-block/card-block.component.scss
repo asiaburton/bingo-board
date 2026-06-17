@@ -1,21 +1,25 @@
 @import '../../styles/variables';
 
+:host {
+  display: block;
+}
+
 .c-bc-square {
   position: relative;
   border: 1px solid black;
   background: white;
-  width: $cell-width;
-  min-width: $cell-min-width;
-  max-width: $cell-max-width;
-  height: $cell-width;
-  min-height: $cell-min-width;
-  max-height: $cell-max-width;
+  width: var(--player-cell, $cell-width);
+  min-width: var(--player-cell, $cell-min-width);
+  max-width: var(--player-cell, $cell-max-width);
+  height: var(--player-cell, $cell-width);
+  min-height: var(--player-cell, $cell-min-width);
+  max-height: var(--player-cell, $cell-max-width);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .c-bc-square__checkbox {
@@ -36,14 +40,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.2rem;
+  padding: 0.12rem;
   box-sizing: border-box;
 }
 
 .c-bc-square__text {
   user-select: none;
-  font-size: $cell-font-size;
-  line-height: 1.15;
+  font-size: var(--player-font, $cell-font-size);
+  line-height: 1.1;
   text-align: center;
   word-break: break-word;
   overflow: hidden;
@@ -51,18 +55,19 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   font-family: sans-serif;
+  max-width: 100%;
 }
 
 .c-bc-square__text--free {
-  font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+  font-size: clamp(0.5rem, calc(var(--player-cell, 48px) * 0.28), 0.85rem);
   font-weight: bold;
 }
 
 .c-bc-square__marker {
   width: 60%;
   height: 60%;
-  max-width: 50px;
-  max-height: 50px;
+  max-width: min(50px, calc(var(--player-cell, 48px) * 0.65));
+  max-height: min(50px, calc(var(--player-cell, 48px) * 0.65));
   position: absolute;
   top: 50%;
   left: 50%;
@@ -76,26 +81,34 @@
   display: none;
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   color: white;
-  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-  line-height: 1.25;
-  padding: 0.25rem;
+  font-size: clamp(0.4rem, calc(var(--player-cell, 48px) * 0.2), 0.75rem);
+  line-height: 1.2;
+  padding: 0.2rem;
   text-align: center;
   z-index: 10;
   pointer-events: none;
-  overflow: hidden;
+  overflow: auto;
   word-break: break-word;
   align-items: center;
   justify-content: center;
+  -webkit-overflow-scrolling: touch;
 }
 
-.c-bc-square:hover .c-bc-square__tooltip {
+.c-bc-square:hover .c-bc-square__tooltip,
+.c-bc-square:focus-within .c-bc-square__tooltip {
   display: flex;
+}
+
+@media (hover: none) {
+  .c-bc-square:active .c-bc-square__tooltip {
+    display: flex;
+  }
 }
 
 @media screen and (min-width: 600px) {
   .c-bc-square__text {
-    font-size: $cell-font-size-desktop;
+    font-size: var(--player-font, $cell-font-size-desktop);
   }
 }

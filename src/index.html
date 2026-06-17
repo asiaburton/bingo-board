@@ -5,6 +5,14 @@
   <title>BingoBoard</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      var path = window.location.pathname;
+      if (path === '/bingo-board' || path === '/bingo-board/') {
+        window.location.replace('/bingo-board/play' + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>

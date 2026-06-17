@@ -6,7 +6,7 @@ import { AdminCallBoardComponent } from './pages/admin/call-board/admin-call-boa
 import { PlayerPlayComponent } from './pages/player/play/player-play.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/play', pathMatch: 'full' },
+  { path: '', redirectTo: 'play', pathMatch: 'full' },
   {
     path: 'admin',
     component: AdminLayoutComponent,

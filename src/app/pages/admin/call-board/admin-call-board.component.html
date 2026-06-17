@@ -1,13 +1,15 @@
 <div class="c-admin-call-board" *ngIf="!noPack">
   <p class="c-admin-call-board__title">{{ gameName }}</p>
-  <app-bingo-board
-    layout="horizontal"
-    [itemGroups]="itemGroups"
-    [calledIds]="calledIds"
-    [lastCalledId]="lastCalledId"
-    (itemToggle)="onItemClick($event)"
-    (clearBoard)="clearBoard()"
-  ></app-bingo-board>
+  <div class="c-admin-call-board__board">
+    <app-bingo-board
+      layout="horizontal"
+      [itemGroups]="itemGroups"
+      [calledIds]="calledIds"
+      [lastCalledId]="lastCalledId"
+      (itemToggle)="onItemClick($event)"
+      (clearBoard)="clearBoard()"
+    ></app-bingo-board>
+  </div>
 </div>
 
 <div class="c-admin-call-board__empty" *ngIf="noPack">

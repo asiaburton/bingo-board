@@ -6,6 +6,6 @@
   [attr.title]="item?.definition || null"
   (click)="onBlockClick()"
 >
-  {{ item?.label }}
+  <span class="c-bb-block__label">{{ item?.label }}</span>
   <span class="c-bb-block__tooltip" *ngIf="item?.definition" aria-hidden="true">{{ item?.definition }}</span>
 </button>

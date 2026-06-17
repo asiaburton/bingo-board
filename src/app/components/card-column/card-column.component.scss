@@ -1,5 +1,10 @@
 @import '../../styles/variables';
 
+:host {
+  display: flex;
+  flex: 0 0 auto;
+}
+
 .c-bc-column {
   margin: 0;
   padding: 0;
@@ -10,12 +15,12 @@
 }
 
 .c-bc-column__heading {
-  width: $cell-width;
-  min-width: $cell-min-width;
-  max-width: $cell-max-width;
-  height: $cell-width;
-  min-height: $cell-min-width;
-  max-height: $cell-max-width;
+  width: var(--player-cell, $cell-width);
+  min-width: var(--player-cell, $cell-min-width);
+  max-width: var(--player-cell, $cell-max-width);
+  height: var(--player-cell, $cell-width);
+  min-height: var(--player-cell, $cell-min-width);
+  max-height: var(--player-cell, $cell-max-width);
   border: 1px solid black;
   border-bottom: none;
   background-color: lightblue;
@@ -23,12 +28,14 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .c-bc-column__heading-text {
-  font-size: $header-font-size;
+  font-size: var(--player-header-font, $header-font-size);
   font-weight: bold;
   font-family: sans-serif;
+  line-height: 1.1;
 }
 
 .c-bc-column__squares {

@@ -1,5 +1,17 @@
 @import '../../styles/variables';
 
+:host {
+  display: block;
+}
+
+:host-context(.c-bb-bingo-board--horizontal) {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  max-height: var(--call-cell-size, 5rem);
+}
+
 .c-bb-block {
   position: relative;
   display: flex;
@@ -14,14 +26,11 @@
   background-color: white;
   border: 1px solid black;
   font-family: sans-serif;
-  font-size: $cell-font-size;
-  padding: 0.2rem;
-  word-break: break-word;
-  line-height: 1.15;
+  padding: 0.15rem;
   text-align: center;
   cursor: pointer;
   box-sizing: border-box;
-  overflow: visible;
+  overflow: hidden;
 
   &--called {
     background-color: yellow;
@@ -31,9 +40,21 @@
     animation: blink 750ms infinite;
   }
 
-  &:hover .c-bb-block__tooltip {
+  &:hover .c-bb-block__tooltip,
+  &:focus-visible .c-bb-block__tooltip {
     display: flex;
   }
+}
+
+.c-bb-block__label {
+  font-size: $cell-font-size;
+  line-height: 1.1;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
 }
 
 @keyframes blink {
@@ -54,37 +75,51 @@
   display: none;
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   color: white;
-  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-  line-height: 1.25;
-  padding: 0.25rem;
+  font-size: clamp(0.45rem, 1.6vw, 0.75rem);
+  line-height: 1.2;
+  padding: 0.2rem;
   text-align: center;
   z-index: 10;
   pointer-events: none;
-  overflow: hidden;
+  overflow: auto;
   word-break: break-word;
   align-items: center;
   justify-content: center;
+  -webkit-overflow-scrolling: touch;
 }
 
 :host-context(.c-bb-bingo-board--horizontal) .c-bb-block {
-  width: $call-board-cell-size;
-  min-width: $call-board-cell-min;
-  max-width: $call-board-cell-max;
-  height: $call-board-cell-size;
-  min-height: $call-board-cell-min;
-  max-height: $call-board-cell-max;
-  font-size: $call-board-cell-font;
-  padding: 0.35rem;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  font-size: var(--call-cell-font, $call-board-cell-font);
+  padding: clamp(0.1rem, 0.15vw, 0.35rem);
+}
+
+:host-context(.c-bb-bingo-board--horizontal) .c-bb-block__label {
+  font-size: inherit;
+  -webkit-line-clamp: 3;
 }
 
 :host-context(.c-bb-bingo-board--horizontal) .c-bb-block__tooltip {
-  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  font-size: clamp(0.4rem, calc(var(--call-cell-size, 48px) * 0.2), 0.8rem);
+  -webkit-line-clamp: unset;
+  display: none;
 }
 
 @media screen and (min-width: 600px) {
-  .c-bb-block {
+  .c-bb-block__label {
     font-size: $cell-font-size-desktop;
+  }
+}
+
+@media (hover: none) {
+  .c-bb-block:active .c-bb-block__tooltip {
+    display: flex;
   }
 }
